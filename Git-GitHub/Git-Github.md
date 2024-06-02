@@ -54,39 +54,38 @@ in the master branch is the worst practice, good practice is to create respectiv
 feature branches and make changes there, And only after the permission of the reviewer
 merge it to the master branch.
 
-● #git branch -> It will tell us all the branches we have in the current repository And
+- #git branch -> It will tell us all the branches we have in the current repository And
 will highlight our current branch, by default it is “master” or “main”
-
-● #git branch dev1 -> It will create a new branch “dev1” and it will have a whole
+- #git branch dev1 -> It will create a new branch “dev1” and it will have a whole
 timeline reference of the “master” branch
-
-● #git init - To initialize a git repository
-● #git status -> It shows us the status of our git repository, it tells us which files currently
+- git init - To initialize a git repository
+- #git status -> It shows us the status of our git repository, it tells us which files currently
 git is tracking.
-● #vim file1.txt -> “Hello Git learners” - Created a file with data
-● #git add file1.txt -> It will add the file in the staging area
-● #git ls-files -> It shows all the files in the staging area
-● #ls - it will show all the files in the working area
-● #git show -> It shows all files in the commit area.
-● #git commit file1.txt -m “committing the first time” -> it will commit the file in
+- #vim file1.txt -> “Hello Git learners” - Created a file with data
+- #git add file1.txt -> It will add the file in the staging area
+- #git ls-files -> It shows all the files in the staging area
+- #ls - it will show all the files in the working area
+- #git show -> It shows all files in the commit area.
+- #git commit file1.txt -m “committing the first time” -> it will commit the file in
 “Commit Area” with the given message
-● Every time we do a commit, It gets a unique id from git, that “id” is called as “commit
+
+- Every time we do a commit, It gets a unique id from git, that “id” is called as “commit
 id”
-● #git log - It will give details of our commit, like author name, date, time
-● #git restore --staged file1 -It will restore the “file1” from the staging area back to
+- #git log - It will give details of our commit, like author name, date, time
+- #git restore --staged file1 -It will restore the “file1” from the staging area back to
 the working area
-● # git show <first 5 letters of commit id> -> It will show info about that particular
+- #git show <first 5 letters of commit id> -> It will show info about that particular
 commit, and also will tell what difference it has from the previous version
-● #git show -> By default it shows the details of the latest commit.
-● #git ls-tree –name-only HEAD -> It will show all the files in the commit area till the
+- #git show -> By default it shows the details of the latest commit.
+- #git ls-tree –name-only HEAD -> It will show all the files in the commit area till the
 “HEAD Commit”
-● HEAD - Git has given a nickname to the latest commit as the HEAD
-● #git show HEAD - It will show details about the latest commit.
-● #git show HEAD~1 - it will show details of the previous commit of the “HEAD”
+- HEAD - Git has given a nickname to the latest commit as the HEAD
+- #git show HEAD - It will show details about the latest commit.
+- #git show HEAD~1 - it will show details of the previous commit of the “HEAD”
 commit
-● #git diff <commid id 1> <commit id 2> -> It will show the code difference between
+- #git diff <commid id 1> <commit id 2> -> It will show the code difference between
 both the commit
-● .gitignore -> Create a file named “.gitignore” Here we can mention all the files and
+- .gitignore -> Create a file named “.gitignore” Here we can mention all the files and
 folders which we don’t want “git” to track in my repository
 
 ● Github- Github is a centralized version control system(CVCS), Where developers
@@ -105,11 +104,18 @@ workspace, And we will have to upload all these areas from our local repository.
 ● Checkout Markdown cheatsheet Here -
 https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatshee
 
+## Git Reset
+
+- **git reset --soft HEAD~1**: Resets the commit history to the previous commit, Will keep the changes in the staging area, and will not make any changes on the working area
+- **git reset --mixed HEAD~1**: Resets the commit history to the previous commit, It will unstage the changes, and will not make any changes to the working area 
+- **git reset --hard HEAD~1**: Resets the commit history to the previous commit, discarding changes from everywhere.
+- In soft and mixed reset, changes remain in the staging area and working directory, respectively, allowing for recommit.
+- In a hard reset, changes are lost, and the commit history cannot be recovered.
+- Soft and mixed reset allow retrieval of commit history with the old commit ID.
+
 
 ## Important link(GitCheatSheet) - 
 
 1) GitHub Git Cheat Sheet - https://education.github.com/git-cheat-sheet-education.pdf
 2) Git Cheat Sheet By GFG - https://www.geeksforgeeks.org/git-cheat-sheet/
 3) Merge Strategies -       https://git-scm.com/docs/merge-strategies
-
-
