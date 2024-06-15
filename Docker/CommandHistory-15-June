@@ -1,0 +1,46 @@
+[root@ip-172-31-35-22 yum.repos.d]# history
+    1  cd /
+    2  which docker
+    3  docker ps
+    4  cd /etc/yum.repos.d/
+    5  ls
+    6  ls
+    7  docker ps
+    8  docker stop 047255d9d558
+    9  docker ps
+   10  docker ps -a
+   11  docker start 047255d9d558
+   12  docker ps
+   13  docker stop 047255d9d558
+   14  docker rm 047255d9d558
+   15  docker ps -a
+   16  clear
+   17  docker ps
+   18  docker attach keen_mclean
+   19  docker commit -h
+   20  docker commit -m "my httpd image" keen_mclean  myhttpd:v1
+   21  docker images
+   22  docker run -it myhttpd
+   23  docker run -it myhttpd:v1
+   24  docker login
+   25  docker tag myhttpd jinny1/gfgdevops22
+   26  docker tag myhttpd:v1 jinny1/gfgdevops22
+   27  docker images
+   28  docker push jinny1/gfgdevops22
+   29  clear
+   30  docker pull jinny1/mario-game
+   31  docker images
+   32  docker run jinny1/mario-game
+   33  docker run -d jinny1/mario-game
+   34  clear
+   35  ls
+   36  docker ps
+   37  docker inspect ad27c6f7a2df
+   38  curl 172.17.0.5
+   39  ls
+   40  docker run -d -p 8080:80 jinny1/mario-game
+   41  netstat -tnlp
+   42  ps -aux
+   43  docker ps
+   44  docker attach 32a455
+   45  history
