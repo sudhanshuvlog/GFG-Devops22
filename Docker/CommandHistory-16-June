@@ -1,0 +1,194 @@
+[root@ip-172-31-47-84 /]# history
+    1  cd /
+    2  yum install docker -y
+    3  systemctl start docker
+    4  docker images
+    5  date
+    6  cal
+    7  yum
+    8  systemctl
+    9  clear
+   10  yum whatprovides systemctl
+   11  rpm -q systemd
+   12  rpm -q httpd
+   13  clear
+   14  docker ps
+   15  docker run --help
+   16  clear
+   17  docker run --name mynginx nginx
+   18  clear
+   19  docker ps
+   20  docker ps -a
+   21  docker images
+   22  docker run -d --name mynginx nginx
+   23  docker run -d --name mynginx1 nginx
+   24  docker ps
+   25  docker inspect myngninx1
+   26  docker inspect mynginx1
+   27  curl 172.17.0.2
+   28  docker pull nginx:stable-perl
+   29  docker images
+   30  clear
+   31  vi Dockerfile
+   32  vi index.html
+   33  ls
+   34  vi Dockerfile
+   35  pwd
+   36  touch a.txt
+   37  ls
+   38  touch /tmp/b.txt
+   39  ls
+   40  cd tmp/
+   41  ls
+   42  cd .
+   43  cd ..
+   44  vi Dockerfile
+   45  clear
+   46  ls
+   47  docker --help
+   48  clear
+   49  docker build --help
+   50  clear
+   51  docker build -t gfghttpd:v1 .
+   52  docker images
+   53  docker run --name myos1 gfghttpd:v1
+   54  docker ps 
+   55  docker ps -a
+   56  vi Dockerfile
+   57  docker run --name myos1 gfghttpd:v1 cal
+   58  docker run --name myos2 gfghttpd:v1 cal
+   59  docker run --name myos3 gfghttpd:v1
+   60  docker run --name myos4 gfghttpd:v1 ls
+   61  clear
+   62  name=sudhanshu
+   63  echo $name
+   64  docker run --name myos5 gfghttpd:v1 echo $x
+   65  clear
+   66  docker image
+   67  docker images
+   68  docker run gfghttpd:v1
+   69  docker run gfghttpd:v1
+   70  docker run gfghttpd:v1 date
+   71  docker run gfghttpd:v1 cal
+   72  docker run gfghttpd:v1 ls
+   73  docker run gfghttpd:v1 cat index.html
+   74  clear
+   75  docker run -dit centos:7  
+   76  docker ps
+   77  docker ps -a
+   78  clear
+   79  docker run -it centos:7  cal
+   80  docker ps -a
+   81  clear
+   82  bash
+   83  date
+   84  clear
+   85* 
+   86  docker run -it centos:7
+   87  docker ps
+   88  vi Dockerfile 
+   89  docker images
+   90  docker build gfghttpd:v2 .
+   91  docker build -t gfghttpd:v2 .
+   92  docker run gfghttpd:v2
+   93  docker run gfghttpd:v2 cal
+   94  date --help
+   95  vi Dockerfile 
+   96  docker build -t gfghttpd:v2 .
+   97  docker run gfghttpd:v2 
+   98  vi Dockerfile 
+   99  docker build -t gfghttpd:v2 .
+  100  docker run gfghttpd:v2 
+  101  docker run -d gfghttpd:v2 
+  102  docker ps
+  103  docker run -d gfghttpd:v2 -A
+  104  docker inspect inspiring_benz
+  105  curl 172.17.0.4
+  106  docker ps
+  107  vi Dockerfile 
+  108  docker build -t gfghttpd:v3 .
+  109  docker images
+  110  docker run -d gfghttpd:v3
+  111  docker ps
+  112  clear
+  113  docker images
+  114  docker history gfghttpd:v2
+  115  docker history nginx
+  116  docker history centos:7
+  117  docker ps
+  118  clear
+  119  vi app.py
+  120  python3 app.py 
+  121  mkdir python
+  122  cd python/
+  123  cp ../app.py .
+  124  ls
+  125  vi Dockerfile
+  126  vi requirements.txt
+  127  vi Dockerfile
+  128  docker build -t mypython:v1 .
+  129  vi requirements.txt 
+  130  docker build -t mypython:v1 .
+  131  docker images
+  132  docker run mypython:v1
+  133  cat app.py 
+  134  ls
+  135  clear
+  136  ps -aux
+  137  clear
+  138  ps -aux
+  139  clear
+  140  cd /
+  141  cd proc
+  142  ls
+  143  pwd
+  144  python3
+  145  clear
+  146  ps -aux | grep bash
+  147  cd 39749
+  148  ls
+  149  cd root
+  150  ls
+  151  docker ps
+  152  docker attch 9a73b1
+  153  docker attach 9a73b1
+  154  pwd
+  155  ls
+  156  ps -aux
+  157  clear
+  158  cd /
+  159  yum install httpd -y
+  160  systemctl start httpd
+  161  ps -aux | grep httpd
+  162  ps -aux | grep bash
+  163  cd /proc/
+  164  cd 40425
+  165  cd root/
+  166  ls
+  167  pwd
+  168  cd ..
+  169  cd ..
+  170  cd 39749
+  171  cd root
+  172  ls
+  173  ls
+  174  date
+  175  cal
+  176  clear
+  177  docker ps
+  178  hostname
+  179  cd /
+  180  ls
+  181  docker attach 9a73
+  182  ps -aux | grep bash
+  183  docker ps
+  184  kill -9 39749
+  185  docker ps
+  186  docker ps -a
+  187  docker start 9a73
+  188  docker ps -a
+  189  ps -aux | grep bash
+  190  nsenter 41471 
+  191  nsenter 41471  bash
+  192  nsenter -t 41471  bash
+  193  history
