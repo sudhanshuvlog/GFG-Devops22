@@ -91,3 +91,87 @@ Important Document Links:
 - `docker save -o image.tar myimg` - save a Docker images to a tar archive
 - `docker load -i image.tar` - load Docker images from a tar archive
 
+### Dockerfile
+
+- It is a file that contains instructions on how to build an image.
+
+**Example Dockerfile**
+
+```dockerfile
+FROM ubuntu:latest
+RUN apt-get update
+RUN apt-get install -y nginx
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+- After creating a Dockerfile, you can build an image with the help of the following command:
+
+```bash
+docker build -t <image_name:version> .
+```
+
+**Dockerfile Instructions**
+
+- **FROM** - This instruction is used to specify the base image.
+- **RUN** - This instruction is used to run commands at the time of building the image.
+- **LABEL** - This instruction is used to add metadata to the image. You can specify any key-value pair as metadata such as maintainer, description, version, etc.
+- **COPY** - This instruction is used to copy files from the local machine to the docker image.
+- **ENV** - This instruction is used to set environment variables inside of your image.
+- **WORKDIR** - This instruction is used to set the working directory for the instructions that follow it.
+- **CMD** - This instruction is used to specify the command that needs to be executed when a container is created from the image.
+- **ENTRYPOINT** - This instruction is used to specify the command that needs to be executed when a container is created from the image. You can specify any command that you would normally run on a Linux machine. The difference between CMD and ENTRYPOINT is that CMD can be overridden by passing arguments to the docker run command. Whereas, ENTRYPOINT cannot be overridden by passing arguments to the docker run command.
+
+**CMD** vs **ENTRYPOINT** - The difference between CMD and ENTRYPOINT is that CMD can be overridden by passing arguments to the docker run command. Whereas, ENTRYPOINT cannot be overridden by passing arguments to the docker run command. For example, if you have a Dockerfile with the following CMD instruction:
+
+```dockerfile
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+You can override the CMD instruction by passing arguments to the docker run command like this:
+
+```bash
+docker run -it <image_name> bash
+```
+
+But if you have a Dockerfile with the following ENTRYPOINT instruction:
+
+```dockerfile
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+```
+
+You cannot override the ENTRYPOINT instruction by passing arguments to the docker run command like this, you can just pass an extra argument to the mentioned command in Entrypoint:
+
+```bash
+docker run -it <image_name> bash
+```
+
+---
+
+### Docker Hub
+
+Docker Hub is a container registry built for developers and open source contributors to find, use, and share their container images. With DockerHub, developers can host public repos that can be used for free, or private repos for teams and enterprises.
+
+To push an image to Docker Hub, you can run the following commands:
+
+```bash
+docker login
+docker tag <image_name> <docker_hub_username>/<image_name>
+docker push <docker_hub_username>/<image_name>
+```
+
+To pull an image from Docker Hub, you can run the following command:
+
+```bash
+docker pull <docker_hub_username>/<image_name>
+```
+
+To Push image into any other registry, you can run the following commands:
+
+```bash
+docker login <registry_url>
+docker tag <image_name> <registry_url>/<image_name>
+docker push <registry_url>/<image_name>
+```
+---
+
+
