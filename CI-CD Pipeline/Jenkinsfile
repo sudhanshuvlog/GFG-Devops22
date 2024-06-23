@@ -1,0 +1,34 @@
+pipeline {
+    agent{
+        label "ec2"
+    }
+
+    stages {
+        stage('Download') {
+            steps {
+                git branch: 'master', url: 'https://github.com/Trainersudhanshu/PythonFlaskAppNew.git'
+                echo "Code downloaded"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "yum install python3-pip -y"
+                sh "pip3 install -r requirements.txt"
+                sh "pytest"
+                echo "Code have been testes succesfully!"
+            }
+        }
+        stage("Build Docker Image")
+            {
+                steps {
+                    sh "docker build -t mywebimg ."
+                }
+            }
+        stage("Deploy in PROD"){
+            steps {
+                sh "docker rm -f webos"
+                sh "docker run -dit --name webos -p 81:80 mywebimg"
+            }
+        }
+}
+}
