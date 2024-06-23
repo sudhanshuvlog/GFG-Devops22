@@ -67,7 +67,12 @@ You can read more about namespaces [here](https://www.nginx.com/blog/what-are-na
 - **docker rmi -f <image-id>**: Deletes a Docker image forcefully.
 - **netstat -tnlp**: Displays all ports running on the host machine.
 - **ctrl+p+q**: Detaches the terminal from the Docker container without stopping it.
-- **docker run -p 80:80 -d --name webos -v /mydata/:/usr/share/nginx/html  nginx** Mount a local     directory with the container to get persistent volume
+- **docker run -p 80:80 -d --name webos -v /mydata/:/usr/share/nginx/html  nginx** Mount a local directory with the container to get persistent volume
+- **docker inspect <container_name>** - This command will allow you to inspect a container. It will give you detailed information about the container such as the IP address, the volumes, the environment variables, etc.
+- **docker exec -it <container_name> bash** - This command will allow you to execute bash program inside your container, you can also run any other program like date, python3 etc.
+- **docker run -it -p 80:80 -v /local_dir:/container_dir <image_name>** - This command will allow you to run a container with the given image. The `-it` flag will allow you to run the container in interactive mode with a terminal. The `-p` flag will allow you to map the port of the container to the port of the host machine. The `-v` flag will allow you to mount a local directory/volume to a directory inside your container. So we can have a persistent storage for our containers.
+- **docker cp <container_name>:<container_dir> <local_dir>** - This command will allow you to copy files from a container to your local machine.
+- **docker cp <local_dir> <container_name>:<container_dir>** - This command will allow you to copy files from your local machine to a container.
 
 - Docker Architecture -
   <img width="596" alt="image" src="https://github.com/sudhanshuvlog/GFG-Devops18/assets/124223047/3624888c-0dd8-46c8-bcdc-4229fde9b825">
@@ -174,4 +179,96 @@ docker push <registry_url>/<image_name>
 ```
 ---
 
+### Docker Compose
 
+It is a tool for defining and running multi-container Docker applications. With Compose, We can use a YAML file to configure our application’s services. Then, with a single command, We can create and start all the services from our configuration.
+
+**Example docker-compose.yml of Wordpress Application**
+
+```yaml
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
+```
+
+- After creating a docker-compose.yml file, you can run the following command to start the application:
+
+```bash
+docker-compose up -d
+```
+- To delete all the containers created by docker-compose, you can run the following command:
+
+```bash
+docker-compose down
+```
+---
+
+## Docker Volume
+
+A Docker volume is a directory that is stored outside of the container. It is used to persist data. It is also used to share data between containers.
+
+**Docker Volume Commands**
+
+- **docker volume ls** - This command will allow you to list all the volumes.
+- **docker volume create <volume_name>** - This command will allow you to create a Named volume which will be managed by docker.
+- **docker volume inspect <volume_name>** - This command will allow you to inspect a volume. It will give you detailed information about the volume such as the mount point, the containers connected to the volume, etc.
+
+- Mount docker named volume to the container
+```bash
+docker run -it -v myvolume:/data centos:7
+```
+- Mount host volume to the container - We are creating a directory in the host system and then mounting it with the container
+
+```bash
+
+mkdir /mydata
+docker run -it -v /mydata/:/data centos:7
+
+```
+
+---
+
+### How to Limit Resources for a Container?
+
+**Docker Resource Limit Commands**
+
+- **docker run -it --memory <memory_limit> <image_name>** - This command will allow you to limit the memory usage of a container.
+- **docker run -it --cpus <cpu_limit> <image_name>** - This command will allow you to limit the CPU usage of a container.
+
+---
+
+### Other Commands, Information, and Files
+
+- **ps aux** - This command will allow us to list all the running processes.
+- **kill -9 <process_id>** - This command will allow us to kill a process.
+- **rpm -q httpd** - This command will allow us to check if a package is installed.
+- **/etc/ssh/sshd_config** - This file contains the configuration for the SSH server.
+- **openssh** - OpenSSH is the premier connectivity tool for remote login with the SSH protocol.
