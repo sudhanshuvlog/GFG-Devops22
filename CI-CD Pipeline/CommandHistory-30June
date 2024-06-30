@@ -1,0 +1,62 @@
+ 1  cd /
+    2  ifonfig
+    3  ifconfig
+    4  docker network ls
+    5  history
+    6  docker run -it --network none centos:7
+    7  docker run -it centos:7
+    8  docker run -it --network host centos:7
+    9  docker run -it --network host nginx
+   10  ifconfig
+   11  clear
+   12  docker network create --driver bridge net1
+   13  docker network create --driver bridge net2
+   14  docker network ls
+   15  docker run -dit --name os1 --network net1 centos:7
+   16  docker run -dit --name os2 --network net2 centos:7
+   17  docker attach os1
+   18  docker attach os2
+   19  docker network connect net2 os1
+   20  docker network connect net1 os2
+   21  docker attach os1
+   22  docker attach os2
+   23  clear
+   24  docker run -dit --name webos1 -p 1352:80 nginx
+   25  docker run -dit --name webos1 -p 1352:80 nginx
+   26  docker run -dit --name webos2 -p 1352:80 nginx
+   27  docker run -dit --name webos2 --network net1  -p 1352:80 nginx
+   28  docker run -dit --name webos5 --network net1  -p 1352:80 nginx
+   29  clear
+   30  docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+   31  docker run -it --name jenkinslave -p 81:22  centos:7
+   32  clear
+   33  vi Dockerfile
+   34  ps -aux
+   35  ps -aux | grep docker
+   36  docker run -dit -p 82:22 jinny1/jenkinsslave
+   37  clear
+   38  vim /usr/lib/systemd/system/docker.service
+   39  systemctl daemon-reload
+   40  systemctl restart docker
+   41  vim /usr/lib/systemd/system/docker.service
+   42  systemctl daemon-reload
+   43  systemctl restart docker
+   44  docker ps
+   45  watch docker ps
+   46  clear
+   47  wget https://download.oracle.com/java/17/archive/jdk-17.0.10_linux-x64_bin.rpm
+   48  yum install jdk-17.0.10_linux-x64_bin.rpm -y
+   49  docker cp jenkins:/var/jenkins_home/workspace/java-pipeline/target/my-app-1.0-SNAPSHOT.jar .
+   50  ls
+   51  java -jar my-app-1.0-SNAPSHOT.jar 
+   52  vi docker-compose.yml
+   53  sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+   54  sudo chmod +x /usr/local/bin/docker-compose
+   55  docker-compose up -d
+   56  docker ps
+   57  vi docker-compose.yml 
+   58  docker-compose up -d
+   59  docker ps
+   60  docker exec -it 6505 bash
+   61  docker exec -it 6506 bash
+   62  history
