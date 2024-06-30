@@ -4,13 +4,13 @@
 name: Python package
 
 on:
-  push:
-    branches: [ "master" ]
+  # push:
+  #   branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
-  build:
+  build-test-python-app:
 
     runs-on: ubuntu-latest
     strategy:
@@ -19,7 +19,7 @@ jobs:
         python-version: ["3.9", "3.10", "3.11"]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
@@ -39,12 +39,12 @@ jobs:
       run: |
         pytest
 
-  sonarqube:
-    name: Build and analyze
+  sonar-qube-scanner:
+    name: sonar-qube-scanner
     runs-on: ubuntu-latest
-    
+    permissions: read-all
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - uses: sonarsource/sonarqube-scan-action@master
@@ -53,7 +53,31 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       # If you wish to fail your job when the Quality Gate is red, uncomment the
       # following lines. This would typically be used to fail a deployment.
-      # - uses: sonarsource/sonarqube-quality-gate-action@master
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
+  docker-build-push-to-dockerhub:
+    runs-on: ubuntu-latest
+    needs: [build-test-python-app, sonar-qube-scanner]
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: jinny1/gfgflask18:latest
