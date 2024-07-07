@@ -1,0 +1,9 @@
+[Unit]
+Description=My Python Server Service File
+
+[Service]
+ExecStart=/usr/bin/python3 /app.py
+MemoryLimit=1G
+CPUShares=1024
+Restart=always
+
