@@ -158,4 +158,63 @@ User administration allows for tracking individual user activities on the system
 
 `exit`: Exits the "userX" user session.
 
+### Cgroup, Systemd, CPU Scheduling
+
+- `lshw` : It will list down all the hardware-related information
+
+#### Control Groups (Cgroups)
+
+Cgroups (short for Control Groups) is a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, etc.) of a collection of processes. Introduced in Linux kernel version 2.6.24, cgroups enable system administrators to allocate resources such as CPU time, system memory, network bandwidth, or combinations of these among user-defined groups of tasks (processes) running on a system.
+
+Key Features:
+Resource Limiting: Set limits on the amount of resources a group of processes can use.
+Prioritization: Prioritize certain groups over others.
+Accounting: Measure how much of a resource a group is using.
+Isolation: Ensure that processes in different groups cannot interfere with each other.
+
+User.slice and System.slice
+Cgroups are managed using a systemd mechanism called slices. These slices divide resources between various parts of the system.
+
+`user.slice`
+The user.slice is a cgroup slice designed to contain all user sessions and user scopes. It organizes the system resources for the user-level processes. Each user’s processes are placed into their own slice, which ensures that the resources are fairly distributed among all users on the system.
+
+Purpose: To manage and limit resources for all user processes.
+Use Case: When multiple users are logged into a system, user.slice ensures that no single user can monopolize system resources, thus maintaining system stability and performance.
+
+`system.slice`
+The system.slice is a cgroup slice that contains system and service-related processes. It includes all the services and daemons that are started by the system at boot time or during operation.
+
+Purpose: To manage and control system services and background processes.
+Use Case: Ensures that essential system services have the necessary resources to function correctly, while also preventing any single service from consuming too many resources.
+
+`Systemd`
+Systemd is a system and service manager for Linux operating systems. It is responsible for booting the system, managing system processes, and controlling system services. Systemd uses units (like services, sockets, targets) to describe and manage various resources and services.
+
+Key Features:
+Parallelization: Starts services in parallel to improve boot time.
+On-Demand Starting: Can start daemons on demand rather than during the boot process.
+Service Supervision: Monitors and automatically restarts services if they crash.
+Cgroups Integration: Uses cgroups to track and manage resources.
+
+#### Time-Sharing (TS) CPU Scheduling Algorithm
+The Time-Sharing (TS) CPU scheduling algorithm is designed to provide a fair and responsive scheduling mechanism for multi-user and multi-tasking environments. It is particularly used in operating systems to manage the execution of processes, ensuring that all processes get a fair share of the CPU time.
+
+Key Concepts
+Multi-Level Feedback Queue: TS scheduling often employs a multi-level feedback queue system. Processes are placed into different queues based on their priority and behavior.
+Quantum Time: Each process is assigned a time slice or quantum, which is the maximum amount of CPU time it can use before being preempted and moved to the end of the queue.
+Dynamic Prioritization: The priority of processes can change dynamically based on their behavior. CPU-bound processes might have their priority reduced, while I/O-bound processes might have their priority increased to ensure responsiveness.
+Fairness: The algorithm ensures that no process is starved of CPU time, providing a balance between CPU-bound and I/O-bound processes.
+
+##### How Cgroups, Slices, and Systemd Work Together
+Cgroups: Provide the underlying mechanism for resource management.
+Systemd: Utilizes cgroups to manage system and service processes efficiently.
+Slices (user.slice and system.slice): Organize processes into hierarchical groups for better resource allocation and control.
+By integrating cgroups with systemd and organizing processes into slices, Linux systems achieve efficient resource management, ensuring that critical system services and user applications run smoothly without interfering with each other.
+
+- Create your systemd service file at this location - #cd /etc/systemd/system
+- Reload Systemd Daemon - #systemctl daemon-reload
+- Start a service - #systemctl start <service name>
+
+
+
 
