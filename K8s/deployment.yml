@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    dc: mumbai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata: 
+      name: xyz 
+      labels: 
+        app: nginx
+    spec:
+      containers:
+      - name: gfgflask
+        image: jinny1/gfgflask18
+        ports:
+        - containerPort: 80
