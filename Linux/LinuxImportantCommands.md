@@ -22,6 +22,21 @@ Device management etc.
 `su`: to switch users, for eg, `sudo su root`
 (sudo here is used for privilege escalation(It is like the “run as administrator option of Windows) and here with this command, we will switch to the root user
 
+##### Password-less Remote Access with SSH
+To enable password-less access for rsync over SSH, you can use SSH keys. Here are the steps:
+
+1. Generate SSH Key Pair
+`ssh-keygen -t rsa`
+By default, this will create a key pair in ~/.ssh/id_rsa (private key) and ~/.ssh/id_rsa.pub (public key).
+
+2. Copy Public Key to Remote Host
+`ssh-copy-id user@remote_host`
+This command copies the public key to the remote host and adds it to the ~/.ssh/authorized_keys file of the user.
+
+3. Test SSH Connection
+`ssh user@remote_host`
+If set up correctly, you should be able to log in without being prompted for a password.
+
 
 ### Here are some useful commands to work with Linux File System:
 
