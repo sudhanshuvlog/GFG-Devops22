@@ -37,3 +37,20 @@ Hence, `tar -xvzf backup.tar.gz`, it will extract the contents of backup.tar.gz 
 `rsync -av /path/to/source /path/to/destination`
 
 This command synchronizes the contents of the source directory to the destination directory. It's useful for incremental backups and syncing files between different locations.
+
+##### Key Features of Rsync
+
+Delta Transfer Algorithm: Rsync uses a delta transfer algorithm which transfers only the differences between the source and the destination, making it efficient and faster.
+Compression: It supports compression during the data transfer, reducing the amount of data sent over the network.
+Preservation of Permissions: Rsync can preserve file permissions, ownership, and timestamps.
+Mirroring: It can mirror data from a source to a destination.
+Exclude Files: Ability to exclude files or directories from the transfer using patterns.
+
+##### Commonly Used Options
+-v: Verbose mode.
+-a: Archive mode, which preserves permissions, symlinks, timestamps, and more.
+-z: Compress data during transfer.
+-P: Show progress during transfer and keep partially transferred files.
+--delete: Delete files in the destination that are not present in the source.
+-r: Recursively copy directories.
+-e ssh: Use SSH as the transport.
