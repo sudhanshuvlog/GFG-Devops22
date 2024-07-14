@@ -231,5 +231,8 @@ By integrating cgroups with systemd and organizing processes into slices, Linux 
 - Start a service - #systemctl start <service name>
 
 
+Check this doc - https://www.redhat.com/sysadmin/cgroups-part-two
+
+
 
 
