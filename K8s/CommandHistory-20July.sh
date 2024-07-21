@@ -1,6 +1,6 @@
 [root@ip-172-31-33-142 mern_app_deployment_on_k8s]# history
     1  cd /
-    2  yum install docker -y
+    2  yum install docker -y 
     3  systemctl start docker 
     4  curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
     5  rpm -Uvh minikube-latest.x86_64.rpm
