@@ -1,0 +1,126 @@
+{
+    "family": "gfg24task",
+    "containerDefinitions": [
+        {
+            "name": "db",
+            "image": "mysql",
+            "cpu": 0,
+            "portMappings": [],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "MYSQL_DATABASE",
+                    "value": "exampledb"
+                },
+                {
+                    "name": "MYSQL_PASSWORD",
+                    "value": "examplepass"
+                },
+                {
+                    "name": "MYSQL_ROOT_PASSWORD",
+                    "value": "examplepass"
+                },
+                {
+                    "name": "MYSQL_USER",
+                    "value": "exampleuser"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/gfg24task",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "ap-south-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        },
+        {
+            "name": "wordpress",
+            "image": "wordpress",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "wordpress-port",
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": false,
+            "environment": [
+                {
+                    "name": "WORDPRESS_DB_USER",
+                    "value": "exampleuser"
+                },
+                {
+                    "name": "WORDPRESS_DB_HOST",
+                    "value": "127.0.0.1"
+                },
+                {
+                    "name": "WORDPRESS_DB_PASSWORD",
+                    "value": "examplepass"
+                },
+                {
+                    "name": "WORDPRESS_DB_NAME",
+                    "value": "exampledb"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/gfg24task",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "ap-south-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        },
+        {
+            "name": "aws-otel-collector",
+            "image": "public.ecr.aws/aws-observability/aws-otel-collector:v0.40.0",
+            "cpu": 0,
+            "portMappings": [],
+            "essential": true,
+            "command": [
+                "--config=/etc/ecs/ecs-cloudwatch-xray.yaml"
+            ],
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/ecs-aws-otel-sidecar-collector",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "ap-south-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "systemControls": []
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::891377007663:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::891377007663:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    }
+}
