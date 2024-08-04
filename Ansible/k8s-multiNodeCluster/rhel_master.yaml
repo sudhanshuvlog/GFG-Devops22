@@ -1,0 +1,64 @@
+- name: For K8s Master Node Configuration Only
+  hosts: k8s-master
+  become: true
+  tasks:
+  - name: Define the Maste Node Private IP on the shell
+    shell:
+      cmd: MASTER_PRIVATE_IP=$(ip addr show eth0 | awk '/inet / {print $2}' | cut -d/ -f1)
+
+
+  - name: define the POD_CIDR variables in the shell
+    shell:
+      cmd: POD_CIDR="192.168.0.0/16"
+
+  - name: define the master Node name in short
+    shell:
+      cmd: NODENAME=$(hostname -s)
+
+  - name: Instialize the Kubernetes Cluster
+    shell:
+      cmd: kubeadm init --apiserver-advertise-address="$MASTER_PRIVATE_IP" --apiserver-cert-extra-sans="$MASTER_PRIVATE_IP" --pod-network-cidr="$POD_CIDR" --node-name="$NODENAME" --ignore-preflight-errors Swap
+    register: kubeinit_details
+
+  - name: output of the Kubeadm init command
+    debug:
+      var: kubeinit_details
+
+  - name: Create .kube directory if it doesn't exist
+    file:
+      path: "{{ ansible_env.HOME }}/.kube"
+      state: directory
+
+  - name: Copy admin.conf to user's .kube directory
+    copy:
+      src: /etc/kubernetes/admin.conf
+      dest: "{{ ansible_env.HOME }}/.kube/config"
+      remote_src: yes
+      mode: '0644'
+
+  - name: Change ownership of .kube/config to the user
+    file:
+      path: "{{ ansible_env.HOME }}/.kube/config"
+      owner: "{{ ansible_user_id }}"
+      group: "{{ ansible_user_gid }}"
+
+  - name: Configure the CNI using Calico
+    shell:
+      cmd: kubectl apply -f https://raw.githubusercontent.com/sudhanshuvlog/kubernetes-multinode-cluster-ansible-aws/main/calico.yaml
+
+  - name: Generate join command
+    command: kubeadm token create --print-join-command
+    register: join_command
+
+  - name: Copy join command to local file
+    local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="./join-command"
+
+- name: In the worker Node
+  hosts: k8s-workers
+  become: true
+  tasks:
+  - name: Copy the join command to server location
+    copy: src=join-command dest=/tmp/join-command.sh mode=0777
+
+  - name: Join the node to cluster
+    command: sh /tmp/join-command.sh
