@@ -52,7 +52,7 @@
       loop:
         - { content: "[kubernetes]\nname=Kubernetes\nbaseurl=https://pkgs.k8s.io/core:/stable:/{{ kubernetes_version }}/rpm/\nenabled=1\ngpgcheck=1\ngpgkey=https://pkgs.k8s.io/core:/stable:/{{ kubernetes_version }}/rpm/repodata/repomd.xml.key", repo_name: "kubernetes.repo" }
 
-    - command: yum install https://download.opensuse.org/repositories/isv:/kubernetes:/addons:/cri-o:/prerelease:/v1.29/rpm/x86_64/cri-o-1.29.4~dev-150500.30.1.x86_64.rpm  -y  
+    - command: yum install https://download.opensuse.org/repositories/isv:/kubernetes:/addons:/cri-o:/prerelease:/v1.29:/build/rpm/x86_64/cri-o-1.29.7~dev-150500.2.1.x86_64.rpm  -y
     - name: Install Kubernetes packages
       dnf:
         name: "{{ item }}"
