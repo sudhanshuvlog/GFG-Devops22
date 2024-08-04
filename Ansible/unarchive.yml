@@ -1,0 +1,6 @@
+- hosts: localhost
+  tasks:
+    - unarchive:
+        src: https://mybucketgfg123.s3.ap-south-1.amazonaws.com/Microservices+App+Deployment+On+EKS-Devops.zip
+        dest: /ansible
+        remote_src: yes

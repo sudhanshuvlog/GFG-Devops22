@@ -1,0 +1,33 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: "Installl httpd package"
+      package:
+        name: "httpd"
+        state: absent
+      tags:
+      - uninstall
+
+    - name: "copy webpages"
+      copy:
+        src: /index.html
+        dest: /var/www/html
+        owner: root
+        group: root
+      tags:
+      - copy
+
+    - copy:
+        src: httpd.conf
+        dest: /etc/httpd/conf/
+      notify:
+        - restart server
+      tags:
+      - copy
+
+  handlers:
+      - name: "restart server"
+        service:
+          name: httpd
+          state: restarted
+          enabled: yes
