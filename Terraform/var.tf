@@ -21,5 +21,5 @@ variable "sgName"{
 
 variable "allowedIngressPort"{
     type = list
-    default = [80, 8080, 9000, 9091, 9090, 82]
+    default = [80, 8080, 9000, 9091, 9090, 82, 22, 9100, 3000]
 }

@@ -7,7 +7,7 @@ resource "aws_instance" "ec2_os1" {
     Name = "gfg22-terraformLaunchedos-${count.index}"
   }
   vpc_security_group_ids = [aws_security_group.gfgsg.id]
-  count = 1
+  count = 2
   depends_on = [ aws_key_pair.gfg22key  ]
 }
 
@@ -28,5 +28,21 @@ resource "aws_security_group" "gfgsg" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
     }
-  egress  = []
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+}
+
+resource "null_resource" "runmyScript" { #configuration management
+  triggers = {
+    always_run = timestamp()
+  }
+  provisioner "local-exec" {
+    # Bootstrap script called with private_ip of each node in the cluster
+   command = "echo hi > output.txt"
+  }
 }
