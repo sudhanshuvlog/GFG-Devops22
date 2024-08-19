@@ -7,4 +7,5 @@ GFG-Devops22 Resources
 - Sample Java Application I used with Maven - https://github.com/Trainersudhanshu/sample-java-app/tree/main
 - Setting up a VM(Virtual Machine) on VirtualBox - https://www.youtube.com/watch?v=Rrci67XqH8s
 - Deploy Microservice App On AWS EKS Cluster With Jenkins - https://github.com/sudhanshuvlog/MicroservicesApp.git
+- Devops End to End Master Pipeline - https://github.com/sudhanshuvlog/Devops-Master-Pipeline-End-To-End
 
