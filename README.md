@@ -1,5 +1,6 @@
 # GFG-Devops22
 GFG-Devops22 Resources
+- GFG Devops 22 Resources&Projects Doc - https://docs.google.com/document/d/1GQuXX8MBgz0uaPgo_ixVFJrdQJ3kpvg8BUmENO5JoEo/edit?usp=sharing
 
 - Connect with me - https://www.linkedin.com/in/sudhanshu--pandey/
 - My DockerHub Repository- https://hub.docker.com/repositories/jinny1
